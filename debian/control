@@ -1,0 +1,12 @@
+Source: ros-eloquent-rqt-service-caller
+Section: misc
+Priority: extra
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake, ros-eloquent-ros-workspace
+Homepage: http://wiki.ros.org/rqt_service_caller
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-rqt-service-caller
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-eloquent-rqt-gui, ros-eloquent-rqt-gui-py, ros-eloquent-rqt-py-common, ros-eloquent-ros-workspace
+Description: rqt_service_caller provides a GUI plugin for calling arbitrary services.
