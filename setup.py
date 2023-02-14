@@ -4,7 +4,7 @@ package_name = 'rqt_service_caller'
 
 setup(
     name=package_name,
-    version='1.1.0',
+    version='1.1.1',
     packages=[package_name],
     package_dir={'': 'src'},
     data_files=[
@@ -18,8 +18,8 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     author='Dorian Scholz',
-    maintainer='Dirk Thomas, Dorian Scholz, Mike Lautman',
-    maintainer_email='dthomas@osrfoundation.org',
+    maintainer='Brandon Ong',
+    maintainer_email='brandon@openrobotics.org',
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',
