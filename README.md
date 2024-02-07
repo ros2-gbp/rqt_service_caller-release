@@ -1,3 +1,26 @@
+## rqt_service_caller (rolling) - 1.2.1-1
+
+The packages in the `rqt_service_caller` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling rqt_service_caller` on `Wed, 07 Feb 2024 14:16:28 -0000`
+
+The `rqt_service_caller` package was released.
+
+Version of package(s) in repository `rqt_service_caller`:
+
+- upstream repository: https://github.com/ros-visualization/rqt_service_caller.git
+- release repository: https://github.com/ros2-gbp/rqt_service_caller-release.git
+- rosdistro version: `1.2.0-1`
+- old version: `1.2.0-1`
+- new version: `1.2.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## rqt_service_caller (rolling) - 1.2.0-1
 
 The packages in the `rqt_service_caller` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling rqt_service_caller` on `Fri, 28 Apr 2023 15:46:57 -0000`
