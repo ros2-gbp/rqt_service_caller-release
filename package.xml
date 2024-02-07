@@ -1,6 +1,6 @@
 <package format="3">
   <name>rqt_service_caller</name>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <description>rqt_service_caller provides a GUI plugin for calling arbitrary services.</description>
 
   <maintainer email="brandon@openrobotics.org">Brandon Ong</maintainer>
@@ -18,6 +18,8 @@
   <exec_depend>rqt_gui</exec_depend>
   <exec_depend>rqt_gui_py</exec_depend>
   <exec_depend>rqt_py_common</exec_depend>
+
+  <test_depend>python3-pytest</test_depend>
 
   <export>
     <architecture_independent/>

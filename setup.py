@@ -4,7 +4,7 @@ package_name = 'rqt_service_caller'
 
 setup(
     name=package_name,
-    version='1.2.0',
+    version='1.2.1',
     packages=[package_name],
     package_dir={'': 'src'},
     data_files=[
@@ -31,6 +31,7 @@ setup(
         'rqt_service_caller provides a GUI plugin for calling arbitrary services.'
     ),
     license='BSD',
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'rqt_service_caller = ' + package_name + '.main:main',
