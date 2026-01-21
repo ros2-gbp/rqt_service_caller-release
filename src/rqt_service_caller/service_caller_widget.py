@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Copyright (c) 2011, Dorian Scholz, TU Darmstadt
 # All rights reserved.
 #
@@ -28,7 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import importlib
+from __future__ import division
+
 import math
 import os
 import random
@@ -36,17 +39,18 @@ import time
 
 from ament_index_python.resources import get_resource
 
+import importlib
+
 from python_qt_binding import loadUi
-from python_qt_binding.QtCore import Qt, qWarning, Slot
+from python_qt_binding.QtCore import Qt, Slot, qWarning
 from python_qt_binding.QtGui import QIcon
 from python_qt_binding.QtWidgets import QMenu, QTreeWidgetItem, QWidget
 
 import rclpy
 
 from rqt_py_common.extended_combo_box import ExtendedComboBox
-from rqt_py_common.message_helpers import get_message_class, get_service_class, SRV_MODE
-from rqt_py_common.topic_helpers import get_type_class, is_primitive_type
-
+from rqt_py_common.message_helpers import get_service_class, get_message_class, SRV_MODE
+from rqt_py_common.topic_helpers import is_primitive_type, get_type_class
 
 class ServiceCallerWidget(QWidget):
     column_names = ['service', 'type', 'expression']
@@ -168,8 +172,7 @@ class ServiceCallerWidget(QWidget):
         for i in range(self.request_tree_widget.columnCount()):
             self.request_tree_widget.resizeColumnToContents(i)
 
-    def _recursive_create_widget_items(
-            self, parent, topic_name, type_name, message, is_editable=True):
+    def _recursive_create_widget_items(self, parent, topic_name, type_name, message, is_editable=True):
         item = QTreeWidgetItem(parent)
         if is_editable:
             item.setFlags(item.flags() | Qt.ItemIsEditable)
@@ -282,7 +285,7 @@ class ServiceCallerWidget(QWidget):
 
     def _process_msg_expression(self, expression):
         """
-        Check if expression matches the format <package_name>.msg.<str2>.
+        Checks if expression matches the format <package_name>.msg.<str2>
 
         If expression matches that format then we attempt to import <package_name>
         and store it in self._eval_locals[<package_name>] for use with eval.
@@ -321,7 +324,7 @@ class ServiceCallerWidget(QWidget):
                     except Exception:
                         successful_conversion = False
         else:
-            if slot_type and type(value) is not slot_type:
+            if slot_type and type(value) != slot_type:
                 try:
                     # try to convert value to right type
                     value = slot_type(value)
@@ -402,8 +405,8 @@ class ServiceCallerWidget(QWidget):
 
         # show context menu
         menu = QMenu(self)
-        action_item_expand = menu.addAction(QIcon.fromTheme('zoom-in'), 'Expand All Children')
-        action_item_collapse = menu.addAction(QIcon.fromTheme('zoom-out'), 'Collapse All Children')
+        action_item_expand = menu.addAction(QIcon.fromTheme('zoom-in'), "Expand All Children")
+        action_item_collapse = menu.addAction(QIcon.fromTheme('zoom-out'), "Collapse All Children")
         action = menu.exec_(global_pos)
 
         # evaluate user action
