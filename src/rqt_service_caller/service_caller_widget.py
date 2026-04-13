@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Copyright (c) 2011, Dorian Scholz, TU Darmstadt
 # All rights reserved.
 #
@@ -30,8 +28,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from __future__ import division
-
+import importlib
 import math
 import os
 import random
@@ -39,18 +36,17 @@ import time
 
 from ament_index_python.resources import get_resource
 
-import importlib
-
 from python_qt_binding import loadUi
-from python_qt_binding.QtCore import Qt, Slot, qWarning
+from python_qt_binding.QtCore import Qt, qWarning, Slot
 from python_qt_binding.QtGui import QIcon
 from python_qt_binding.QtWidgets import QMenu, QTreeWidgetItem, QWidget
 
 import rclpy
 
 from rqt_py_common.extended_combo_box import ExtendedComboBox
-from rqt_py_common.message_helpers import get_service_class, get_message_class, SRV_MODE
-from rqt_py_common.topic_helpers import is_primitive_type, get_type_class
+from rqt_py_common.message_helpers import get_message_class, get_service_class, SRV_MODE
+from rqt_py_common.topic_helpers import get_type_class, is_primitive_type
+
 
 class ServiceCallerWidget(QWidget):
     column_names = ['service', 'type', 'expression']
@@ -94,18 +90,20 @@ class ServiceCallerWidget(QWidget):
         current_service_name = instance_settings.value('current_service_name', None)
         if current_service_name:
             current_service_index = self.service_combo_box.findData(
-                current_service_name, Qt.DisplayRole)
+                current_service_name, Qt.ItemDataRole.DisplayRole)
             if current_service_index != -1:
                 self.service_combo_box.setCurrentIndex(current_service_index)
 
-        if int(instance_settings.value('splitter_orientation', Qt.Vertical)) == int(Qt.Vertical):
-            self.splitter.setOrientation(Qt.Vertical)
+        if instance_settings.value('splitter_orientation', Qt.Orientation.Vertical) == \
+                Qt.Orientation.Vertical:
+            self.splitter.setOrientation(Qt.Orientation.Vertical)
         else:
-            self.splitter.setOrientation(Qt.Horizontal)
+            self.splitter.setOrientation(Qt.Orientation.Horizontal)
 
     def trigger_configuration(self):
         new_orientation = \
-            Qt.Vertical if self.splitter.orientation() == Qt.Horizontal else Qt.Horizontal
+            Qt.Orientation.Vertical if self.splitter.orientation() == \
+            Qt.Orientation.Horizontal else Qt.Orientation.Horizontal
         self.splitter.setOrientation(new_orientation)
 
     @Slot()
@@ -140,9 +138,10 @@ class ServiceCallerWidget(QWidget):
         self.service_combo_box.addItems(sorted(self._services.keys()))
 
     @Slot(str)
-    def on_service_combo_box_currentIndexChanged(self, service_name):
+    def on_service_combo_box_currentTextChanged(self, service_name):
         self.request_tree_widget.clear()
         self.response_tree_widget.clear()
+        print('service_name', service_name)
         service_name = str(service_name)
         if not service_name:
             return
@@ -172,12 +171,13 @@ class ServiceCallerWidget(QWidget):
         for i in range(self.request_tree_widget.columnCount()):
             self.request_tree_widget.resizeColumnToContents(i)
 
-    def _recursive_create_widget_items(self, parent, topic_name, type_name, message, is_editable=True):
+    def _recursive_create_widget_items(
+            self, parent, topic_name, type_name, message, is_editable=True):
         item = QTreeWidgetItem(parent)
         if is_editable:
-            item.setFlags(item.flags() | Qt.ItemIsEditable)
+            item.setFlags(item.flags() | Qt.ItemFlag.ItemIsEditable)
         else:
-            item.setFlags(item.flags() & (~Qt.ItemIsEditable))
+            item.setFlags(item.flags() & (~Qt.ItemFlag.ItemIsEditable))
 
         if parent is None:
             # show full topic name with preceding namespace on toplevel item
@@ -188,7 +188,7 @@ class ServiceCallerWidget(QWidget):
         item.setText(self._column_index['service'], topic_text)
         item.setText(self._column_index['type'], type_name)
 
-        item.setData(0, Qt.UserRole, topic_name)
+        item.setData(0, Qt.ItemDataRole.UserRole, topic_name)
 
         if hasattr(message, 'get_fields_and_field_types'):
             for slot_name, type_name in message.get_fields_and_field_types().items():
@@ -217,7 +217,7 @@ class ServiceCallerWidget(QWidget):
         #   (column_name, new_value))
 
         if column_name == 'expression':
-            topic_name = str(item.data(0, Qt.UserRole))
+            topic_name = str(item.data(0, Qt.ItemDataRole.UserRole))
             if len(new_value):
                 self._service_info['expressions'][topic_name] = new_value
             elif topic_name in self._service_info['expressions']:
@@ -285,7 +285,7 @@ class ServiceCallerWidget(QWidget):
 
     def _process_msg_expression(self, expression):
         """
-        Checks if expression matches the format <package_name>.msg.<str2>
+        Check if expression matches the format <package_name>.msg.<str2>.
 
         If expression matches that format then we attempt to import <package_name>
         and store it in self._eval_locals[<package_name>] for use with eval.
@@ -324,7 +324,7 @@ class ServiceCallerWidget(QWidget):
                     except Exception:
                         successful_conversion = False
         else:
-            if slot_type and type(value) != slot_type:
+            if slot_type and type(value) is not slot_type:
                 try:
                     # try to convert value to right type
                     value = slot_type(value)
@@ -405,8 +405,8 @@ class ServiceCallerWidget(QWidget):
 
         # show context menu
         menu = QMenu(self)
-        action_item_expand = menu.addAction(QIcon.fromTheme('zoom-in'), "Expand All Children")
-        action_item_collapse = menu.addAction(QIcon.fromTheme('zoom-out'), "Collapse All Children")
+        action_item_expand = menu.addAction(QIcon.fromTheme('zoom-in'), 'Expand All Children')
+        action_item_collapse = menu.addAction(QIcon.fromTheme('zoom-out'), 'Collapse All Children')
         action = menu.exec_(global_pos)
 
         # evaluate user action

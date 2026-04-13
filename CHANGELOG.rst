@@ -2,16 +2,27 @@
 Changelog for package rqt_service_caller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.2.2 (2026-01-21)
+1.5.2 (2026-04-13)
 ------------------
-* fix setuptools deprecations (backport `#33 <https://github.com/ros-visualization/rqt_service_caller/issues/33>`_) (`#35 <https://github.com/ros-visualization/rqt_service_caller/issues/35>`_)
-  fix setuptools deprecations (`#33 <https://github.com/ros-visualization/rqt_service_caller/issues/33>`_)
-  (cherry picked from commit 4f02b443f773c75ed2e29e4249b028c870e655e0)
-  Co-authored-by: mosfet80 <10235105+mosfet80@users.noreply.github.com>
-* Remove CODEOWNERS (backport `#29 <https://github.com/ros-visualization/rqt_service_caller/issues/29>`_) (`#30 <https://github.com/ros-visualization/rqt_service_caller/issues/30>`_)
-  <hr>This is an automatic backport of pull request `#29 <https://github.com/ros-visualization/rqt_service_caller/issues/29>`_ done by
-  [Mergify](https://mergify.com).
-* Contributors: mergify[bot]
+* Support Qt6 (`#38 <https://github.com/ros-visualization/rqt_service_caller/issues/38>`_)
+* Contributors: Alejandro Hernández Cordero
+
+1.5.1 (2025-07-30)
+------------------
+* fix setuptools deprecations (`#33 <https://github.com/ros-visualization/rqt_service_caller/issues/33>`_)
+* Contributors: mosfet80
+
+1.5.0 (2025-04-28)
+------------------
+
+1.4.0 (2025-02-02)
+------------------
+* Update rqt_service_caller to our standard policies. (`#31 <https://github.com/ros-visualization/rqt_service_caller/issues/31>`_)
+* Remove CODEOWNERS (`#29 <https://github.com/ros-visualization/rqt_service_caller/issues/29>`_)
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
+1.3.0 (2024-04-26)
+------------------
 
 1.2.1 (2024-02-07)
 ------------------
