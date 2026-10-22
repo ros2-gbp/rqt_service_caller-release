@@ -2,6 +2,11 @@
 Changelog for package rqt_service_caller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.3 (2026-10-22)
+------------------
+* Added missing depencencies to package.xml (`#44 <https://github.com/ros-visualization/rqt_service_caller/issues/44>`_)
+* Contributors: Alejandro Hernández Cordero
+
 2.0.2 (2026-07-09)
 ------------------
 * Python3 modernization (`#42 <https://github.com/ros-visualization/rqt_service_caller/issues/42>`_)
